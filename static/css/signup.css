@@ -1,0 +1,22 @@
+.modal-body .form-control{
+    height: 50px!important;
+    color: #FE980F!important;
+  }
+#exampleModalLabel{
+    color: #FE980F!important;
+    font-size: 33px;
+}  
+.modal-body h5{
+    font-size: 20px;
+    font-weight: 500;
+    color: #FE980F!important;
+}
+
+.modal-header{
+    padding: 0px!important;
+    border: 0px!important;
+
+}
+h2{
+    color: #FE980F!important;
+}
