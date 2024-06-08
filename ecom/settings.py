@@ -71,8 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "ecom.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 DATABASES = {
     "default": {
@@ -139,3 +138,5 @@ STATICFILES_DIRS = [BASE_DIR,"static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = 'signup'
 LOGOUT_REDIRECT_URL = 'signup'
+
+
