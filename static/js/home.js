@@ -13,7 +13,7 @@ $(document).ready(function(){
             success: function(data) {
                 // Handle the response here if needed
                 $('#showCategories').html(data)
-                console.log(response);
+                // console.log(data);
             },
             error: function(xhr, status, error) {
                 // Handle errors here
@@ -21,6 +21,8 @@ $(document).ready(function(){
             }
         });
     });
+
+    
 });
 $(document).ready(function() {
     $('#signup-form').submit(function(event) {
@@ -181,4 +183,82 @@ $(document).ready(function () {
     });
     
     
+});
+
+
+$(document).ready(function () {
+    console.log("Document is ready");
+
+    $(".add-to-cart").click(function (e) {
+        alert('hello');
+        e.preventDefault();
+        console.log('Add to cart clicked'); // Debugging log
+
+        var productId = $(this).data('product-id');
+        console.log('Product ID:', productId); // Debugging log
+
+        var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+        console.log('CSRF Token:', csrftoken); // Debugging log
+
+        $.ajax({
+            type: 'POST',
+            url: '/add-to-cart/',  // Ensure this URL matches your Django URL configuration
+            data: {
+                product_id: productId,
+                csrfmiddlewaretoken: csrftoken
+            },
+            success: function (response) {
+                console.log('Success response:', response); // Debugging log
+                alert('Product added to cart!');
+                // Update the cart count or any other UI changes here
+            },
+            error: function (error) {
+                console.log('Error:', error); // Debugging log
+                alert('Something went wrong.');
+            }
+        });
+    });
+
+    // Handle quantity increase
+    $(".cart_quantity_up").click(function(e){
+        e.preventDefault();
+        var productId = $(this).data('product-id');
+        updateCartQuantity(productId, 'increase');
+    });
+
+    // Handle quantity decrease
+    $(".cart_quantity_down").click(function(e){
+        e.preventDefault();
+        var productId = $(this).data('product-id');
+        updateCartQuantity(productId, 'decrease');
+    });
+
+    function updateCartQuantity(productId, action) {
+        $.ajax({
+            type: 'POST',
+            url: "/update_cart_quantity/" ,
+            data: {
+                product_id: productId,
+                action: action,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.message === 'Cart updated') {
+                    var quantityInput = $(".cart_quantity_button a[data-product-id='" + productId + "']").siblings("input.cart_quantity_input");
+                    quantityInput.val(response.quantity);
+                    var totalPriceElement = quantityInput.closest("tr").find(".cart_total_price");
+                    totalPriceElement.text('$' + response.total_price);
+                    var currentSubTotal = $('#sub_total').text();
+                    $('#sub_total').text('$' + response.sub_total);
+                    $('#tax').text('$' + response.per);
+                    $('#total_bill').text('$' + response.bill);
+                    alert('Cart updated');
+                }
+            },
+            error: function(error) {
+                console.log(error);
+                alert('Something went wrong.');
+            }
+        });
+    }
 });

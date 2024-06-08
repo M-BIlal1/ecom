@@ -16,6 +16,8 @@ path('checkout', views.checkout, name='checkout'),
 path('cart', views.cart, name='cart'),
 path('reset', views.resetPassword, name='resetPasswordCahnge'),
 path('resetPasswordView/<str:uid>/<str:token>/', views.resetPasswordView, name='resetPasswordChange'),
+path('add-to-cart/', views.add_to_cart, name='add_to_cart'),
+path('update_cart_quantity/', views.update_cart_quantity, name='update_cart_quantity'),
 
 
 
