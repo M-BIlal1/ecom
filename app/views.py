@@ -16,8 +16,8 @@ from django.utils.encoding import smart_str
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-@csrf_exempt
-@login_required
+# @csrf_exempt
+# @login_required
 def home(request):
     cat = category.objects.all()
     pro = product.objects.all()
@@ -48,7 +48,7 @@ def signup(request):
         return JsonResponse({'success': True})
 
    
-    return render(request, 'login.html')  # Replace with your actual signup form template
+    return render(request, 'register.html')  # Replace with your actual signup form template
 
 
 def login(request):
@@ -64,7 +64,7 @@ def login(request):
         else:
             return JsonResponse({'success': False, 'error': 'Invalid credentials'}, status=400)
 
-    return render(request, 'login.html')
+    return render(request, 'signin.html')
     
 
 def logout(request):
@@ -75,14 +75,14 @@ def contact(request):
     return render(request,'contact-us.html') 
 def four04(request):
     return render(request,'404.html') 
-def blog(request):
-    return render(request,'blog.html') 
+def placeorder(request):
+    return render(request,'place-order.html') 
 def blogsingle(request):
     return render(request,'blog-single.html') 
 def shop(request):
-    return render(request,'shop.html') 
+    return render(request,'store.html') 
 def productDetails(request):
-    return render(request,'product-details.html') 
+    return render(request,'product-detail.html') 
 def checkout(request):
     return render(request,'checkout.html') 
 def cart(request):
@@ -94,7 +94,7 @@ def cart(request):
     percentage = (subtotal/100)*5
     total_bill = percentage + subtotal
 
-    return render(request,'cart.html',{'cart_products':cart_products,'totalBill':subtotal,'per':percentage,'bill':total_bill}) 
+    return render(request,'cart.html') 
 
 @csrf_exempt
 def resetPassword(request):
