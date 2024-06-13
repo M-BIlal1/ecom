@@ -1,0 +1,28 @@
+{% for pro in product %}
+	<div class="col-md-4">
+		<figure class="card card-product-grid">
+			<div class="img-wrap"> 
+				
+				<img src="{{pro.image}}">
+				
+			</div> <!-- img-wrap.// -->
+			<figcaption class="info-wrap">
+				<div class="fix-height">
+					<a href="/getProduct/{{pro.id}}" class="title">{{pro.name}}</a>
+					<div class="price-wrap mt-2">
+						<span class="price">${{pro.price}}</span>
+						<del class="price-old">${{pro.rice }}</del>
+					</div> <!-- price-wrap.// -->
+					</div>
+				<input type="hidden" class="productId" value="{{pro.id}}">
+				{% if pro.id in cart %}
+				<a  class="btn btn-block btn-success addToCart" style="
+    cursor: pointer;">Added in cart </a>
+				{% else %}
+				<a  class="btn btn-block btn-primary addToCart" style="
+    cursor: pointer;">Added to cart </a>
+				{% endif %}
+			</figcaption>
+		</figure>
+	</div> 
+	{% endfor %}

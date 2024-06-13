@@ -42,3 +42,21 @@ class Cart(models.Model):
 
     def get_total(self):
         return self.product.price * self.quantity
+    
+class Profile(models.Model):
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(upload_to='static/profile_images/', blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'    

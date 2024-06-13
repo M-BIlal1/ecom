@@ -1,0 +1,38 @@
+
+	{% for c in cart %}
+<tr>
+	<td>
+		<figure class="itemside align-items-center">
+			<div class="aside"><img src="{{c.product.image}}" class="img-sm"></div>
+			<figcaption class="info">
+				<a href="#" class="title text-dark">{{c.product.name}}</a>
+				<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
+			</figcaption>
+		</figure>
+	</td>
+	<td> 
+		<!-- col.// -->
+					<div class="col"> 
+						<div class="input-group input-spinner">
+							<div class="input-group-prepend">
+							<button class="btn btn-light " type="button" id="button-minus" data-product-id="{{c.product.id}}"> <i class="fa fa-minus"></i> </button>
+							</div>
+							<input type="text"  class="form-control cart_quantity_input"  value="{{c.quantity}}">
+							<div class="input-group-append">
+							<button class="btn btn-light" type="button" id="button-plus" data-product-id="{{c.product.id}}"> <i class="fa fa-plus"></i> </button>
+							</div>
+						</div> <!-- input-group.// -->
+					</div> <!-- col.// -->
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price productPrice">${{c.total_price}}</var> 
+			<small class="text-muted"> ${{c.product.price}} each</small> 
+		</div> <!-- price-wrap .// -->
+	</td>
+	<td class="text-right"> 
+		<input type="hidden" class="cartProductId" value="{{c.product.id}}">
+	<a  class="btn btn-danger removeCartProduct"> Remove</a>
+	</td>
+</tr>
+{% endfor %}

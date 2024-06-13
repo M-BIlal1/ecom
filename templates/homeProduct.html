@@ -1,0 +1,11 @@
+{% for pro in products %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="/getProduct/{{pro.id}}" class="img-wrap"> <img src="{{pro.image}}"> </a>
+			<figcaption class="info-wrap">
+				<a href="/getProduct/{{pro.id}}" class="title">{{pro.name}}</a>
+				<div class="price mt-1">${{pro.price}}</div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> 
+{% endfor %}
